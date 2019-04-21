@@ -22,7 +22,8 @@ services:
       - '--web.console.templates=/etc/prometheus/consoles'
       - '--storage.tsdb.retention=200h'
       - '--web.enable-lifecycle'
-    # restart: unless-stopped
+      
+    restart: unless-stopped
     expose:
       - 9090
     ports:
@@ -43,8 +44,6 @@ services:
       - '--path.procfs=/host/proc'
       - '--path.sysfs=/host/sys'
       - '--collector.filesystem.ignored-mount-points=^/(sys|proc|dev|host|etc)($$|/)'
-      - '--collector.diskstats.ignored-devices=^(ram|fd|(h|s|v|xv)d[a-z]|nvme\\d+n\\d+p)\\d+$$'
-
     restart: unless-stopped
     expose:
       - 9100
@@ -72,11 +71,12 @@ services:
      - 3000:3000
    networks:
      - monitor-net     
-  web:
-   build: .
-   expose:
-     - 3000    
-   ports:
-     - "5000:5000"
-   networks:
-     - monitor-net    
+#  web:
+#   build: .
+#   restart: unless-stopped
+#   expose:
+#     - 3000    
+#   ports:
+#     - "5000:5000"
+#   networks:
+#     - monitor-net    
