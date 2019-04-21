@@ -10,7 +10,7 @@ volumes:
 services:
 
   prometheus:
-    image: prom/prometheus:latest
+    image: prom/prometheus-linux-armv7:master
     container_name: prometheus
     volumes:
       - ./prometheus/:/etc/prometheus/
@@ -32,7 +32,7 @@ services:
       - monitor-net
 
   nodeexporter:
-    image: prom/node-exporter:latest
+    image: prom/node-exporter-linux-armv7:master
     container_name: nodeexporter
     user: root
     privileged: true
